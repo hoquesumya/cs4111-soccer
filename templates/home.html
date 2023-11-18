@@ -1,0 +1,51 @@
+{%extends 'index.html'%} 
+{% block title%}
+Soccer_information
+{%endblock%}
+{%block content%}
+<div class="main h-100">
+    <div class = "body-main h-100" style=
+                                    "background-color: black;
+                                     ">
+         <div class=" container-fluid h-100 justify-content-center"
+         style="padding: 32px;  
+                background: linear-gradient(rgb(255 255 255 / 52%) 0%,rgb(0, 0, 0) 100%);">
+                 <div class = "login-start" style="width:100%; max-width: 734px;">
+                
+                    <div class="login-container d-flex flex-column"
+                    style="color:white; background-color: rgb(0, 0, 0);  row-gap: normal; border-radius: 8px;">
+                       <h1 class = "text-center mt-4 mb-5">Welcome to soccer_news</h1>
+                       <ul class="list-group d-flex flex-column m-auto row g-0 bg-transparent" >
+                        <li class="list-group-item bg-transparent">
+                            <button 
+                            type="submit" 
+                            class="btn border border-white p-2 all-competition" 
+                            style="border-radius: 20px; width: 17rem;"
+                            onclick="get_competition()"
+                            >
+                            
+                                <span class = "click_google text-capitalize m-auto fs-6" 
+                            style="color:rgba(255, 255, 255, 0.9); letter-spacing: normal;">
+                              All competitons
+                            </span>
+                            </button>
+                        
+                        </li>
+
+                       </ul>
+                    </div>
+                       
+                </div>
+        
+        
+        </div>
+       
+
+    
+    </div>
+</div>
+
+
+
+
+{%endblock%}
