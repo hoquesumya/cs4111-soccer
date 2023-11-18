@@ -4,12 +4,16 @@ import os
 from sqlalchemy import *
 from dotenv import load_dotenv
 from sqlalchemy.pool import NullPool
-from flask import Flask, request, render_template, g, redirect, Response, abort,jsonify
+from flask import Flask, request, render_template, g, redirect, Response, abort,jsonify,make_response
 from config import engine
+import requests
 basedir = os.path.abspath(os.path.dirname(__file__))
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../templates')
 print(tmpl_dir)
+
+
 app = Flask(__name__, template_folder=tmpl_dir, static_folder='../static')
+names = []
 
 
 @app.before_request
@@ -44,9 +48,6 @@ def teardown_request(exception):
 def index():
 
   print(request.args)
-  
-  #context = dict(data = names)
-  #return render_template("index.html", **context)
   return render_template("home.html")
 
 
@@ -54,19 +55,21 @@ def index():
 @app.route('/competition')
 def comp():
   data =  g.conn.execute(text("""SELECT * FROM competition"""))
-  names = []
+  #names = []
   g.conn.commit()
   #results = cursor.mappings.all()
   for result in data.mappings():
     names.append(result["cname"])
   data.close()
-
+  
   return jsonify({
-    "name": names
+    "name":names
   })
+  
 @app.route('/comp')
 def temp():
-  return render_template("competition.html")
+  print(names)
+  return render_template("competition.html", comp_name=names)
 
 # Example of adding new data to the database
 @app.route('/add', methods=['POST'])
