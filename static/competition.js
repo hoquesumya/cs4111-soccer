@@ -2,7 +2,7 @@
 function get_competition(){
     fetch('/competition')
     .then (response =>{
-        window.location.replace("/comp")
+        window.location.href = "/comp"
         console.log("data are:")  
     })
     

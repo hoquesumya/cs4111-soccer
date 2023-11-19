@@ -144,8 +144,9 @@ def playerstats():
   g.conn.commit()
   
   #print(data.mappings())
+  performancestats.append(f"{player_name}")
   for result in data.mappings():
-    print(result)
+    #print(result)
     performancestats.append(f"season start date: {result['season_start_date']}")
     performancestats.append(f"goals scored: {result['nr_goals']}")
     performancestats.append(f"assists given: {result['nr_assists']}")

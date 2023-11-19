@@ -1,6 +1,5 @@
 function get_playerstats(button) {
     var playerName = button.textContent.trim();
-    print(playerName);
     console.log(playerName);
     fetch('/playerstats', {
         method: 'POST',
@@ -14,7 +13,7 @@ function get_playerstats(button) {
         // Handle the received data here, for example:
         console.log("Received data:", data);
         // Redirect to performancestats only after handling the data
-        window.location.replace("/performancestats");
+        window.location.href = "/performancestats"
     })
     .catch(error => {
         console.log(error);
