@@ -14,7 +14,8 @@ print(tmpl_dir)
 
 app = Flask(__name__, template_folder=tmpl_dir, static_folder='../static')
 names = []
-
+games = []
+players = []
 
 @app.before_request
 def before_request():
@@ -55,11 +56,9 @@ def index():
 @app.route('/competition')
 def comp():
   data =  g.conn.execute(text("""SELECT * FROM competition"""))
-  #names = []
   g.conn.commit()
-  #results = cursor.mappings.all()
   for result in data.mappings():
-    names.append(result["cname"])
+    if result["cname"] not in names: names.append(result["cname"])
   data.close()
   
   return jsonify({
@@ -84,6 +83,51 @@ def add():
         }),200
   
   #return redirect('/')
+
+@app.route('/allgamesquery')
+def allgamesquery():
+  #games = []
+  data =  g.conn.execute(text("""SELECT t1.team_name AS team1_name, g.final_score, t2.team_name AS team2_name
+  FROM Game AS g
+  JOIN matched AS m ON g.game_id = m.game_id
+  JOIN Team AS t1 ON m.team_id1 = t1.team_id
+  JOIN Team AS t2 ON m.team_id2 = t2.team_id;
+  """))
+  
+  g.conn.commit()
+  print(data.mappings())
+  for result in data.mappings():
+    val = f"{result['team1_name']} {result['final_score']} {result['team2_name']}"
+    if val not in games: games.append(val)
+  data.close()
+  return jsonify({'game': games})
+  #return render_template("games.html", all_games=jsonify({'game': games}))
+  
+  
+@app.route('/games')
+def returnallgames():
+  #print(games)
+  return render_template("games.html", all_games=games)
+
+
+@app.route('/allplayersquery')
+def allplayersquery():
+  
+  data =  g.conn.execute(text("""SELECT T.name FROM Player P, Team_Member T WHERE P.member_id = T.member_id;"""))
+  
+  g.conn.commit()
+  
+  #print(data.mappings())
+  for result in data.mappings():
+    if result['name'] not in players: players.append(result['name'])
+  data.close()
+  return jsonify({'player': players})
+  
+  
+@app.route('/players')
+def returnallplayers():
+  return render_template("players.html", all_players=players)
+
 
 if __name__ == "__main__":
   import click

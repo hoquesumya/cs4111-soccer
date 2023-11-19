@@ -4,8 +4,8 @@ Soccer_information
 {%endblock%}
 {%block content%}
 
-<div class = "competition_main h-100">
-    <div class = "comp-main h-100" style=
+<div class = "plaeyrs1 h-100">
+    <div class = "games2 h-100" style=
     "background-color: black;
      ">
       <div class=" container-fluid h-100 justify-content-center align-items: center"
@@ -16,23 +16,17 @@ Soccer_information
                 style="color:white; background-color: rgb(0, 0, 0);  row-gap: normal; border-radius: 8px;
                 ">
                  <ul class="list-group d-flex flex-column m-auto row g-0 bg-transparent" id="comp_name" >
-                    Competition Name:
-                    {% for name in comp_name %}
+                    Player Names
+                    {% for player in all_players %}
                         <li class="list-group-item bg-transparent" style="color: white">
-                            {{ name }}
+                            {{player}}
                         </li>
                     {% endfor %}
                  </ul>
-                    
-
                 </div>
-            
-            
-            </div>
-
+              </div>
+      </div>
     </div>
-    </div>
-
 </div>
 
 
