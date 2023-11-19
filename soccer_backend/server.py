@@ -16,6 +16,7 @@ app = Flask(__name__, template_folder=tmpl_dir, static_folder='../static')
 names = []
 games = []
 players = []
+performancestats = []
 
 @app.before_request
 def before_request():
@@ -127,6 +128,55 @@ def allplayersquery():
 @app.route('/players')
 def returnallplayers():
   return render_template("players.html", all_players=players)
+
+
+@app.route('/playerstats', methods=['POST'])
+def playerstats():
+  global performancestats
+  performancestats = []
+  player_name = request.json
+  val = f"SELECT * FROM player_stats S \
+          WHERE S.member_id = (SELECT T.member_id FROM Player P1, Team_Member T \
+                                WHERE P1.member_id = T.member_id \
+                                AND T.name = '{player_name}');"
+  data =  g.conn.execute(text(val))
+  
+  g.conn.commit()
+  
+  #print(data.mappings())
+  for result in data.mappings():
+    print(result)
+    performancestats.append(f"season start date: {result['season_start_date']}")
+    performancestats.append(f"goals scored: {result['nr_goals']}")
+    performancestats.append(f"assists given: {result['nr_assists']}")
+    performancestats.append(f"red cards received: {result['nr_red_cards']}")
+    performancestats.append(f"yellow cards received: {result['nr_yellow_cards']}")
+    performancestats.append(f"games started: {result['starting_xi']}")
+    performancestats.append(f"games started: {result['nr_injuries']}") 
+  data.close()
+  #print(performancestats)
+  val2 = f"SELECT T.team_name, P.player_type, M.age, M.height, M.weight \
+  FROM Player P, Team_Member M, Team T \
+  WHERE P.member_id = M.member_id AND T.team_id = M.team_id AND M.name = '{player_name}';"
+
+  data =  g.conn.execute(text(val2))
+  g.conn.commit()
+  for result in data.mappings():
+    performancestats.append(f"team name: {result['team_name']}")
+    performancestats.append(f"position: {result['player_type']}")
+    performancestats.append(f"age: {result['age']}")
+    performancestats.append(f"height: {result['height']}")
+    performancestats.append(f"weight: {result['weight']}") 
+  data.close()
+  return jsonify({'performancestats': performancestats})
+  
+  
+@app.route('/performancestats')
+def returnplayerstats():
+  #print(performancestats)
+  return render_template("playerstats.html", player_stats=performancestats)
+
+
 
 
 if __name__ == "__main__":

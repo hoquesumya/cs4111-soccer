@@ -16,11 +16,9 @@ Soccer_information
                 style="color:white; background-color: rgb(0, 0, 0);  row-gap: normal; border-radius: 8px;
                 ">
                 <ul class="list-group d-flex flex-column m-auto row g-0 bg-transparent">
-                    {% for player in all_players %}
+                    {% for row in player_stats %}
                     <li class="list-group-item bg-transparent" style="color: white">
-                        <button class="player-button" style="border-radius: 20px; width: 17rem; cursor: pointer;" onclick="get_playerstats(this)">
-                            {{ player }}
-                        </button>
+                            {{row}}
                     </li>
                     {% endfor %}
                 </ul>
