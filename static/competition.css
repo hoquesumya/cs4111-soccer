@@ -1,0 +1,34 @@
+#list_comp{
+    display: inline;
+    padding: 10px;
+    color: antiquewhite;
+  
+   
+}
+
+#all_list li{
+    display: inline;
+    padding-right: 20px;
+}
+.name-container1{
+    margin-top: 5px;
+}
+.comp_divider{
+    margin-bottom: 20px;
+    border-radius: 20px; width: 40rem;
+     color: antiquewhite;
+}
+#sql-query{
+    z-index: 10;
+    position: absolute; 
+    display: none;
+    left: 20rem;
+    top:10rem;
+    background-color: bisque;
+}
+.query-cross{
+    position: relative;
+    top: 0;
+    right: 0;
+    display: block;
+}

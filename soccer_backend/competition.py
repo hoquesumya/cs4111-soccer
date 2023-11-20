@@ -13,7 +13,7 @@ names = []
 
 competitons= Blueprint("comp_list", __name__, static_folder=tmpl_dir,static_folder='../static')
 
-@competitons.route("/competition")
+@competitons.route("/comp_name")
 def comp():
   data =  g.conn.execute(text("""SELECT * FROM competition"""))
   #names = []
@@ -26,6 +26,10 @@ def comp():
   return jsonify({
     "name":names
   })
+@competitons.route("/comp")
+def temp():
+  print(names)
+  return render_template("competition.html", comp_name=names)
 
 
 

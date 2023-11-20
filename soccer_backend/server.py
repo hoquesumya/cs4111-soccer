@@ -6,7 +6,10 @@ from dotenv import load_dotenv
 from sqlalchemy.pool import NullPool
 from flask import Flask, request, render_template, g, redirect, Response, abort,jsonify,make_response
 from config import engine
-import requests
+
+from datetime import *
+
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../templates')
 print(tmpl_dir)
@@ -14,6 +17,8 @@ print(tmpl_dir)
 
 app = Flask(__name__, template_folder=tmpl_dir, static_folder='../static')
 names = []
+comp_date=[]
+
 
 
 @app.before_request
@@ -60,6 +65,12 @@ def comp():
   #results = cursor.mappings.all()
   for result in data.mappings():
     names.append(result["cname"])
+    start_date = result["start_date"].strftime('%Y/%m/%d')
+    end_date = result["end_date"].strftime('%Y/%m/%d')
+
+    comp_date.append([start_date,end_date])
+
+    
   data.close()
   
   return jsonify({
@@ -69,7 +80,23 @@ def comp():
 @app.route('/comp')
 def temp():
   print(names)
-  return render_template("competition.html", comp_name=names)
+  print(comp_date)
+  comp_info ={
+    "name":names,
+     "date":comp_date
+  }
+  return render_template("competition.html", comp_info=comp_info)
+
+
+@app.route('/competition-sql-query',methods=['POST'])
+def select_query():
+  comp_name = request.json['comp-name']
+  start_date = request.json['start-date']
+  end_date = request.json['end-date']
+  print(start_date)
+  return jsonify({
+    "done":comp_name
+  },200)
 
 # Example of adding new data to the database
 @app.route('/add', methods=['POST'])
