@@ -9,6 +9,7 @@ import datetime
 from config import engine
 basedir = os.path.abspath(os.path.dirname(__file__))
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../templates')
+
 names = []
 comp_date=[]
 
@@ -41,8 +42,17 @@ def teardown_request(exception):
 
 @competitons.route('/competition')
 def comp():
-  
-  data =  g.conn.execute(text("""SELECT * FROM competition"""))
+  #filter some of the data out because whe don't have any entry of that particular row
+  global names
+  global comp_date
+  names=[]
+  comp_date=[]
+  data =  g.conn.execute(text("""SELECT DISTINCT * FROM competition C
+                              WHERE C.cname !='UEFA Champions League' 
+                              AND C.cname !='Serie A'
+                               AND C.start_date !='2022-08-06'
+                              
+                              """))
   g.conn.commit()
   #results = cursor.mappings.all()
   for result in data.mappings():
