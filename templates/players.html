@@ -6,6 +6,24 @@ Soccer_information
 
 <div class = "plaeyrs1 h-100">
     <button onclick="goBack()">Go Back</button>
+    <!-- Dropdown to select the attribute -->
+    <label for="attributeDropdown">Filter players by:</label>
+    <select id="attributeDropdown">
+        <option value="competition">Competition</option>
+        <option value="team">Team</option>
+        <option value="position">Position</option>
+    </select>
+
+    <!-- Dropdown to display the values based on the selected attribute -->
+    <label for="valueDropdown">Select value:</label>
+    <select id="valueDropdown">
+        <!-- This dropdown will be populated dynamically based on the selected attribute -->
+        <!-- Options will be added using JavaScript -->
+    </select>
+    <button onclick="filterPlayers()">Filter</button>
+    <label>(Content is not currently filtered)</label>
+
+
     <div class = "games2 h-100" style=
     "background-color: black;
      ">

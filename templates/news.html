@@ -19,15 +19,15 @@ Soccer_information
                  <table class="table table-dark table-striped">
                   <thead>
                       <tr>
-                          <th>Home Team</th>
-                          <th>Score</th>
-                          <th>Away Team</th>
+                          <th>Headline</th>
+                          <th>News Scope</th>
+                          <th>Summary</th>
                       </tr>
                   </thead>
                   <tbody>
-                      {% for game in all_games %}
+                      {% for newsitem in all_news %}
                       <tr>
-                          {% for value in game %}
+                          {% for value in newsitem %}
                           <td>{{ value }}</td>
                           {% endfor %}
                       </tr>
