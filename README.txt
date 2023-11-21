@@ -20,8 +20,8 @@ teams, in-field positions, and participation in competitions. This is interestin
 generate the query which is sent to the database. Additionally, the players can based
 
 2- the competitions webpage is interesting because it provides the user with ways to fetch information about competitions, 
-which are the most 'general' entity in our ER design, and all associated sub-entities such as teams, games, etc. The user
-input is used in the queries sent to the database.
+which are the most 'general' entity in our ER design, and all associated sub-entities such as teams, players The user
+input is used in the queries sent to the database. The user will click on the each container to access thr dropdown menu to 
 
 AI Tools:
 ChatGPT was used to help with designing UI elements in HTML such as tables and buttons for the games/players/coaches webpages,
@@ -38,8 +38,14 @@ get_coaches():
 
 get_competition():
 - Purpose: Retrieves competition data.
-- Endpoint: '/competition' webpage.
+- Endpoint: '/en/competition' webpage.
 - Trigger: Clicking competitions button on home page.
+- Location: home page
+
+get_teams():
+- Purpose: Retrieves Team's infos
+- Endpoint: '/tm/team-info'
+- Trigger: Team's button onclick
 - Location: home page
 
 get_games():
