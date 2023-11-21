@@ -1,15 +1,14 @@
+//outer event listener ensures that the script runs after the webpage was loaded
 document.addEventListener("DOMContentLoaded", function() {
-    const currentUrl = window.location.pathname; // Gets the current URL path
-    if (currentUrl === '/players') {
+    //only executed when we are currently in the 'players' webpage
+    const currentUrl = window.location.pathname; 
+    if (currentUrl === '/p/players') {
         //get references to attribute and value dropdowns
         const attributeDropdown = document.getElementById('attributeDropdown');
         const valueDropdown = document.getElementById('valueDropdown');
 
         //define values for each attribute
         const attributeValues = {
-            //age: ['< 25', '>= 25'],
-            //height: ['< 1.80 m', '>= 1.80 m'],
-            //weight: ['< 100 Kg', '>= 100 Kg'],
             competition: ['La Liga', 'World Cup', 'English Premier League'],
             team: ['Barcelona', 'Real Madrid', 'Brazil', 'Argentina', 'Manchester City'],
             position: ['Forward', 'Defender', 'Midfielder', 'Goalkeeper']
@@ -18,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
         //this function populates the valueDropdown based on the selected attribute
         function populateValues() {
             const selectedAttribute = attributeDropdown.value;
-            valueDropdown.innerHTML = ''; // Clear previous options
+            valueDropdown.innerHTML = '';
 
             attributeValues[selectedAttribute].forEach(value => {
                 const option = document.createElement('option');
@@ -31,40 +30,31 @@ document.addEventListener("DOMContentLoaded", function() {
         //event listener for changes in the attributeDropdown
         attributeDropdown.addEventListener('change', populateValues);
 
-        // Initial population of valueDropdown based on the default selected attribute
+        //initial population of valueDropdown based on the default selected attribute
         populateValues();
     }
 });
 
 function filterPlayers() {
+    //sets up input to send to python server
     const requestData = {
         arg1: attributeDropdown.value,
         arg2: valueDropdown.value
     };
     
-    //const selectedAttribute = ;
-    //const selectedValue = ;
-
-    // Logic to filter players based on the selected attribute and value
-    // This is where you will apply the filtering logic to display the relevant players
-    // You might fetch data from the server based on the selected attribute and value
-    // Or filter the existing list of players displayed on the page
-    // Example: Fetch players based on selected attribute and value
-    fetch('/filteringlogic', {
+    //filtering logic is handled in python based on user input of filter attribute and attribute value
+    //perform api call
+    fetch('p/filteringlogic', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        //body: JSON.stringify(selectedAttribute, selectedValue)
         body: JSON.stringify(requestData)
     })
-    //fetch(`/filteredPlayers?attribute=${selectedAttribute}&value=${selectedValue}`)
     .then(response => response.json())
     .then(data => {
-        // Handle the response data and update the UI to display filtered players
-        //console.log('Filtered players:', data);
         // Update the UI with filtered players
-        window.location.href = "/filteredplayers"
+        window.location.href = "p/filteredplayers"
     })
     .catch(error => {
         console.error('Error filtering players:', error);

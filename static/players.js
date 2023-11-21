@@ -1,8 +1,8 @@
-
+//this is a basic api call to produce the p/players webpage
 function get_players(){
-    fetch('/allplayersquery')
+    fetch('p/allplayersquery')
     .then (response =>{
-        window.location.href = "/players"
+        window.location.href = "p/players"
         //console.log("data are:")  
     })
     

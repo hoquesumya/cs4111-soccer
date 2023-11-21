@@ -1,8 +1,8 @@
-
+//this is a basic api call to produce the n/news webpage
 function get_news(){
-    fetch('/newsquery')
+    fetch('n/newsquery')
     .then (response =>{
-        window.location.href = "/news"
+        window.location.href = "n/news"
         console.log("data are:")  
     })
     

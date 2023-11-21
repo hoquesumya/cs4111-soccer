@@ -1,4 +1,4 @@
-
+//this is a basic api call to produce the competitions webpage
 function get_competition(){
     fetch('/competition')
     .then (response =>{

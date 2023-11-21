@@ -1,8 +1,8 @@
-
+//this is a basic api call to get the g/games page
 function get_games(){
-    fetch('/allgamesquery')
+    fetch('g/allgamesquery')
     .then (response =>{
-        window.location.href = "/games"
+        window.location.href = "g/games"
         console.log("data are:")  
     })
     

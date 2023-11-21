@@ -1,19 +1,20 @@
 function get_playerstats(button) {
+    //gets player name as text from player button
     var playerName = button.textContent.trim();
     console.log(playerName);
-    fetch('/playerstats', {
+    //perform api call with relevant input
+    fetch('p/playerstats', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(playerName)
     })
-    .then(response => response.json()) // Parse the response as JSON
+    .then(response => response.json())
     .then(data => {
-        // Handle the received data here, for example:
         console.log("Received data:", data);
-        // Redirect to performancestats only after handling the data
-        window.location.href = "/performancestats"
+        //redirect to new performancestats webpage
+        window.location.href = "p/performancestats"
     })
     .catch(error => {
         console.log(error);
