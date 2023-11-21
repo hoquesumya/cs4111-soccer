@@ -116,22 +116,26 @@ def select_query():
                                                                     AND C.start_date=:start_date)
                   """
   else:
-    query_text = """
-          SELECT g.game_id, g.location, g.game_date 
+    query_text1 = """
+          SELECT DISTINCT g.game_id, g.location, g.game_date 
           FROM matched M,game g WHERE g.game_id = M.game_id 
           AND M.team_id1 IN  (SELECT T1.team_id
                               FROM team T1, contains C
                                WHERE T1.team_id=C.team_id 
                                 AND C.cname =:comp_name 
                                 AND C.start_date=:start_date) 
-           OR M.team_id2 IN (SELECT T1.team_id
-                               FROM team T1, contains C
-                               WHERE T1.team_id=C.team_id 
+           OR M.team_id2 IN (SELECT T2.team_id
+                               FROM team T2, contains C
+                               WHERE T2.team_id=C.team_id 
                                 AND C.cname =:comp_name 
                                 AND C.start_date=:start_date);
 
 
                 """
+    query_text="""SELECT * FROM game g WHERE g.cname =:comp_name AND g.game_date >:start_date;
+
+                
+          """
   
   data =  g.conn.execute(text(query_text),params_dict)
   g.conn.commit()
