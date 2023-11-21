@@ -22,9 +22,10 @@
     z-index: 10;
     position: absolute; 
     display: none;
-    left: 20rem;
-    top:10rem;
-    background-color: bisque;
+    left: 30%;
+    top:30%;
+    background-color: rgb(77, 44, 4);
+    width: 50%;
 }
 .query-cross{
     position: relative;
@@ -32,3 +33,13 @@
     right: 0;
     display: block;
 }
+#start-q-list{
+    list-style-type:none
+}
+#sql-t{
+    margin: 20px;
+
+}
+
+tr th {
+    padding-right: 30px;}

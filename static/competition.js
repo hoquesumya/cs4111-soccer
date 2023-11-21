@@ -2,9 +2,9 @@
 var hidden = true
 
 function get_competition(){
-    fetch('/competition')
+    fetch('/en/competition')
     .then (response =>{
-        window.location.replace("/comp")
+        window.location.replace("/en/comp")
         console.log("data are:")  
     })
     
@@ -124,7 +124,7 @@ function handleSql(type,name,start_date,end_date){
     if (type == 0)
         console.log("find query for teams")
     
-    fetch('/competition-sql-query',{
+    fetch('/en/competition-sql-query',{
         method:"POST",
         body:JSON.stringify({
             "type":type,
@@ -138,11 +138,114 @@ function handleSql(type,name,start_date,end_date){
         }
 
     })
-    .then(response => response.json())
-    .then(json => console.log(json));
-    
-   var d = document.getElementById("sql-query")
-   d.style.display="block"
+    .then (response =>{
+       return response.json() 
+    })
+    .then(json => {
+        
+       var rcv_date;
+       if (type==0 || type==1)
+            rcv_date =json[0].query_result
+        else{
+                console.log(json.game_id)
+        }
+        
+        
+        var d = document.getElementById("sql-query")
+        d.style.display="block"
+        
+        if (type==0 || type==1){
+            var ul = document.getElementById("start-q-list")
+            if (ul){
+                d.removeChild(ul)
+            }
+            ul = document.createElement("ul")
+            ul.setAttribute("id","start-q-list")
+            var table = document.getElementById("sql-t")
+            if (table && table.parentNode===d){
+                d.removeChild(table)
+            }
+            
+            console.log(rcv_date.length)
+            
+            for (var i =0;i<rcv_date.length;i++){
+                var li = document.createElement("li")
+                li.textContent = rcv_date[i]
+                ul.append(li)   
+            }
+           
+            d.appendChild(ul)
+        }
+        //else game table 
+        else{
+            var table = document.getElementById("sql-t")
+            if (table){
+                d.removeChild(table)
+            }
+            table = document.createElement("table")
+            table.setAttribute("id","sql-t")
+            var head_list = ["Game_id  ","Game_location  ","Game_date  "]
+            
+            //var thead=table.createTHead();
+            var thead = document.createElement("thead")
+            //var row = thead.insertRow();
+            var row = document.createElement("tr")
+
+            ul = document.getElementById("start-q-list")
+            if (ul && ul.parentNode===d){
+                d.removeChild(ul)
+            }
+            console.log(row)
+            for (var i =0;i<head_list.length;i++){
+                var th1= document.createElement("th")
+                th1.setAttribute("scope","col")
+                th1.innerHTML=head_list[i]
+                row.appendChild(th1)
+
+            }
+           
+           thead.appendChild(row)
+           table.appendChild(thead)
+           fill_table(table,json)
+           d.appendChild(table)
+           
+        }
+    })
+    .catch(error =>{
+        console.log(error)
+    })
+}
+
+function fill_table(d,json){
+
+
+    var tbody = document.createElement("tbody")
+
+    var id = json.game_id
+    var date=json.game_date
+    var location=json.game_location
+    for (var i=0;i <id.length;i++){
+        var row = document.createElement("tr")
+        
+        var td1= document.createElement("td")
+        td1.innerText=id[i]
+        row.appendChild(td1)
+
+        var td2 = document.createElement("td")
+        td2.innerText=location[i]
+        row.appendChild(td2)
+
+        var td3 = document.createElement("td")
+        td3.innerText=date[i]
+        row.appendChild(td3)
+
+        tbody.appendChild(row)
+
+    }
+
+    d.appendChild(tbody)
+
+
 }
 function handleSqlDiv(){
     var div = document.getElementById("sql-query")

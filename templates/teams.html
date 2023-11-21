@@ -3,11 +3,11 @@
 Soccer_information
 {%endblock%}
 {%block content%}
-<div class = "competition_main h-100">
-    <div class = "comp-main h-100" style=
+<div class = "team_main h-100">
+    <div class = "team-main h-100" style=
     "background-color: black;
      ">
-      <div class=" container-fluid d-flex justify-content-center"
+      <div class="container-fluid d-flex justify-content-center"
       style="padding: 10px;  
              background: linear-gradient(rgb(255 255 255 / 52%) 0%,rgb(0, 0, 0) 100%);">
               <div class = "name-start" style="width:100%; max-width: 900px;">
@@ -18,22 +18,21 @@ Soccer_information
                  position: relative;
                 ">
                  <ul class="list-group d-flex flex-column m-auto row g-0 bg-transparent mt-5" 
-                 id="comp_name"
+                 id="team_name"
                  style = "list-style-type: none;"
                   >
 
                  </ul>
 
                  <hr role = "presentation" class="d-block mb-4 mt-4">
-                 <div id ="sql-query" class="" style="display: none;">
+                 <div id ="sql-query-team" class="" style="display: none;">
                   <button type="button" class="btn border border-white p-2 query-cross" 
-                  onclick="handleSqlDiv()">
+                  onclick="handleSqlDivTeams()">
                     x 
                   </button>
                  
-                  <div id ="sql-list">
+                  <div id ="sql-list-team">
                   
-
                   </div>
                   
                 </div> 
@@ -47,9 +46,11 @@ Soccer_information
     </div>
 
 </div>
+
 <script>
-    handleCompetition({{comp_info|tojson}})
+  handleTeams({{teams_info|tojson}})
 </script>
+
 
 
 

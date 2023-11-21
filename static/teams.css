@@ -1,0 +1,12 @@
+
+#list_comp_team{
+    display: inline;
+    padding: 10px;
+    color: antiquewhite;
+  
+   
+}
+#all_list_team li{
+    display: inline;
+    padding-right: 20px;
+}
