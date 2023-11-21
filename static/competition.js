@@ -89,7 +89,7 @@ function handlesimple(n){
 
 }
 function handleToogle(div1,name,start_date,end_date){
-    var choice = ['Teams','Players', 'Games']
+    var choice = ['Teams','Players']
     var button = document.createElement("button")
     button.setAttribute("class", "btn btn-secondary dropdown-toggle");
     button.setAttribute("type","button") ;
@@ -179,7 +179,7 @@ function handleSql(type,name,start_date,end_date){
             d.appendChild(ul)
         }
         //else game table 
-        else{
+       /* else{
             var table = document.getElementById("sql-t")
             if (table){
                 d.removeChild(table)
@@ -211,14 +211,14 @@ function handleSql(type,name,start_date,end_date){
            fill_table(table,json)
            d.appendChild(table)
            
-        }
+        }*/
     })
     .catch(error =>{
         console.log(error)
     })
 }
 
-function fill_table(d,json){
+/*function fill_table(d,json){
 
 
     var tbody = document.createElement("tbody")
@@ -248,7 +248,7 @@ function fill_table(d,json){
     d.appendChild(tbody)
 
 
-}
+}*/
 function handleSqlDiv(){
     var div = document.getElementById("sql-query")
     div.style.display="none"

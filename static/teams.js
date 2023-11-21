@@ -2,7 +2,7 @@ var hidden = true
 function get_teams(){
     fetch('/tm/team-info')
     .then (response =>{
-       window.location.replace("/tm/teams")
+               window.location.href="/tm/teams"
        
     })
 
