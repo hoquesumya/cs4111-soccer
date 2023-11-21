@@ -68,3 +68,24 @@ def temp():
 
   }
   return render_template("teams.html", teams_info=team_info)
+
+@teams.route('/team-sql-query',methods=['POST'])
+def give_sql():
+  query_result = []
+  query_text = ""
+  team = request.json["team_id"]
+  params_dict = {"team":team
+               }
+  query_text="""
+              SELECT T.name FROM team_member T, coach C 
+              WHERE T.team_id=:team AND C.member_id = T.member_id
+              AND T.height > 1.0 AND T.weight >10; 
+            """
+  data =  g.conn.execute(text(query_text),params_dict)
+  g.conn.commit()
+  for res in data.mappings():
+    query_result.append(res["name"])
+  
+  return jsonify({
+    "res":query_result
+  })

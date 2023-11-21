@@ -10,3 +10,24 @@
     display: inline;
     padding-right: 20px;
 }
+#sql-query-team{
+    z-index: 10;
+    position: absolute; 
+    display: none;
+    left: 30%;
+    top:30%;
+    background-color: rgb(77, 44, 4);
+    width: 50%;
+    color:whitesmoke
+}
+#sql-l li{
+    list-style-type: none
+
+}
+#headers{
+    margin-left: 30%;
+    margin-top:10%
+}
+#headers button{
+    padding-right: 10px;
+}

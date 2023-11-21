@@ -39,9 +39,6 @@ def teardown_request(exception):
 
 
 
-
-
-
 @competitons.route('/competition')
 def comp():
   

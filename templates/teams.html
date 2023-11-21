@@ -7,9 +7,33 @@ Soccer_information
     <div class = "team-main h-100" style=
     "background-color: black;
      ">
-      <div class="container-fluid d-flex justify-content-center"
+     
+     
+<div class = "nav-div">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark me-auto">
+     <div class="container-fluid id = "show_logo" style="padding: 15px; ">
+      <button>
+        Go back
+      </button>
+         <a 
+             class="navbar-brand ms-auto"
+             href="javascript:;" onclick="main_page()"
+             mb-01
+             h2  style="text-decoration: none; color: white; font-size: x-large;">
+             <i class="bi bi-house-fill"></i>
+                 
+          </a>
+
+     </div>
+
+ </nav>
+</div>
+     
+     <div class="container-fluid d-flex justify-content-center"
       style="padding: 10px;  
              background: linear-gradient(rgb(255 255 255 / 52%) 0%,rgb(0, 0, 0) 100%);">
+
+
               <div class = "name-start" style="width:100%; max-width: 900px;">
                 <div class="name-container1 d-flex flex-column"
                 style="color:white; background-color: rgb(0, 0, 0);  
@@ -17,6 +41,18 @@ Soccer_information
                  border-radius: 8px;
                  position: relative;
                 ">
+                <div id="headers" style="display: inline-block;">
+                  <button id ="">
+                    Team Name
+                 </button>
+                 <button>
+                   Nr_players
+                 </button>
+                 <button>
+                   Nr_coaches
+                 </button>
+                </div>
+                
                  <ul class="list-group d-flex flex-column m-auto row g-0 bg-transparent mt-5" 
                  id="team_name"
                  style = "list-style-type: none;"
@@ -26,14 +62,11 @@ Soccer_information
 
                  <hr role = "presentation" class="d-block mb-4 mt-4">
                  <div id ="sql-query-team" class="" style="display: none;">
-                  <button type="button" class="btn border border-white p-2 query-cross" 
+                  <button type="button" class="btn border border-white p-2 query-cross" style="color: bisque;"
                   onclick="handleSqlDivTeams()">
                     x 
-                  </button>
-                 
-                  <div id ="sql-list-team">
+                 </button>
                   
-                  </div>
                   
                 </div> 
                  

@@ -80,7 +80,7 @@ function handlesimpleTeam(n){
 }
 
 function handleToogleTeam(div1,team_id){
-    var choice = ['Players', 'Coaches','Games']
+    var choice = [ 'Coaches']
     var button = document.createElement("button")
     button.setAttribute("class", "btn btn-secondary dropdown-toggle");
     button.setAttribute("type","button") ;
@@ -114,7 +114,47 @@ function handleToogleTeam(div1,team_id){
 }
 function handleSqlTeam(index,team_id){
     
+    fetch('/tm/team-sql-query',{
+        method:"POST",
+        body:JSON.stringify({
+            "team_id":team_id
+        }),
+
+        headers:{
+            "Content-type": "application/json; charset=UTF-8"
+        }
+
+    })
+    .then (response =>{
+        return response.json() 
+     })
+     .then(json=>{
+        console.log(json.res)
+
+        var d = document.getElementById("sql-query-team")
+        d.style.display="block"
+        var ul = document.getElementById("sql-l")
+        if (ul){
+            d.removeChild(ul)
+        }
+        ul = document.createElement("ul")
+        ul.setAttribute("id","sql-l")
+        for (var i=0;i<json.res.length;i++){
+            var li = document.createElement("li")
+            li.innerText=json.res[i]
+            ul.append(li)
+        }
+        d.appendChild(ul)
+
+     })
+
 }
+
+function handleSqlDivTeams(){
+    var div = document.getElementById("sql-query-team")
+    div.style.display="none"
+}
+
 
 
    
