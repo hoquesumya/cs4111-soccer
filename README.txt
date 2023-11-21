@@ -1,6 +1,6 @@
 PSQL server is assocaited with the account with uni: sh4242
 
-URL of webapp: 
+URL of webapp: 35.231.61.78:8111
 
 Parts implemented from proposal:
 All user interaction with the database discussed in the proposal was implemented. The website serves as a frontend for a
@@ -74,4 +74,6 @@ get_players():
 - Endpoint: /p/players
 - Trigger: Clicking on the players button.
 - Location: homepage
+
+
 
